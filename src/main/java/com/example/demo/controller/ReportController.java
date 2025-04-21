@@ -1,0 +1,110 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.Corp;
+import com.example.demo.service.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/reports")
+public class ReportController {
+
+    @Autowired
+    private ReportService reportService;
+
+    @GetMapping("/{username}")
+    public ResponseEntity<byte[]> getUserReport(@PathVariable String username) {
+        try {
+            byte[] pdfBytes = reportService.generateUserReport(username);
+
+            return ResponseEntity.ok()
+                    //cấu hình việc tải xuống dưới tên user_report.pdf thay vì hiển thị trên trình duyệt
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=user_report.pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PostMapping("/company-detail")
+    public ResponseEntity<byte[]> generateCompanyReport(@RequestBody Corp request) throws Exception {
+        byte[] pdfBytes = reportService.generatePdfReport(request, "company_detail_report.jrxml");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("inline", "company_report.pdf"); // Để hiển thị trên trình duyệt
+        // Hoặc:
+        // headers.setContentDispositionFormData("attachment", "company_report.pdf"); // Để tải về
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+
+    @PostMapping("/corp-detail/save")
+    public ResponseEntity<String> saveCompanyReport(@RequestBody Corp request,
+                                                    @RequestParam(value = "outputPath", required = false) String outputPath,
+                                                    @RequestParam(value = "outputFileName", required = false, defaultValue = "corpDetalReport.pdf") String outputFileName) throws Exception {
+        String filePath = reportService.savePdfReport(request, "corp.jrxml", outputPath, outputFileName);
+        return ResponseEntity.ok("Báo cáo đã được lưu thành công tại: " + filePath);
+    }
+
+    // Định nghĩa class CompanyDetailRequest (ví dụ)
+    public static class CompanyDetailRequest {
+        private String companyName;
+        private String address;
+        private List<TaxInfo> taxInfos;
+        private List<MemberCompany> memberCompanies;
+
+        // Getters and setters
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public List<TaxInfo> getTaxInfos() {
+            return taxInfos;
+        }
+
+        public void setTaxInfos(List<TaxInfo> taxInfos) {
+            this.taxInfos = taxInfos;
+        }
+
+        public List<MemberCompany> getMemberCompanies() {
+            return memberCompanies;
+        }
+
+        public void setMemberCompanies(List<MemberCompany> memberCompanies) {
+            this.memberCompanies = memberCompanies;
+        }
+    }
+
+    public static class TaxInfo {
+        private String taxName;
+        private BigDecimal amount;
+        // Getters and setters
+    }
+
+    public static class MemberCompany {
+        private String name;
+        private String location;
+        // Getters and setters
+    }
+}

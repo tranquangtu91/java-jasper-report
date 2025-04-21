@@ -1,0 +1,38 @@
+{
+  "id": 123,
+  "lookupCode": "LC456",
+  "businessRegNumber": "BRN789012",
+  "idCardNumber": "123456789",
+  "corpName": "Công ty TNHH ABC",
+  "address": "Số 10, Đường XYZ, Quận Hoàn Kiếm, Hà Nội",
+  "status": "ACTIVE",
+  "lookupUpdatedTime": "2025-04-20T23:35:00+07:00",
+  "taxCode": "0123456789",
+  "vat": "10%",
+  "taxType": [
+    {
+      "taxTypeCode": "VAT",
+      "taxTypeName": "Thuế giá trị gia tăng"
+    },
+    {
+      "taxTypeCode": "CIT",
+      "taxTypeName": "Thuế thu nhập doanh nghiệp"
+    }
+  ],
+  "governing": [
+    {
+      "id": 456,
+      "lookupCode": "GLC123",
+      "businessRegNumber": "GBR456789",
+      "idCardNumber": null,
+      "corpName": "Tổng công ty XYZ",
+      "address": "Tòa nhà PQR, Đường UVW, Quận Ba Đình, Hà Nội",
+      "status": "ACTIVE",
+      "lookupUpdatedTime": "2025-04-19T10:00:00+07:00",
+      "taxCode": "9876543210",
+      "vat": "5%",
+      "taxTypes": [],
+      "governingCorps": []
+    }
+  ]
+}
