@@ -21,6 +21,8 @@ public class Corp {
     private Date lookupUpdatedTime;
     private String taxCode;
     private String vat;
-    private List<TaxType> taxType;
-    private List<Corp> governing;
+//    private List<TaxType> taxType;
+//    private List<Corp> governing;
+    private List<TaxType> taxTypes;
+    private List<Corp> governingUnits;
 }

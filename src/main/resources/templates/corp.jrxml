@@ -80,7 +80,7 @@
 	<parameter name="status" class="java.lang.String"/>
 	<parameter name="lookupUpdatedTime" class="java.util.Date"/>
 	<parameter name="taxTypeDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<parameter name="gorverningDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="governingDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -90,7 +90,7 @@
 	<title>
 		<band height="135" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="-16" width="170" height="30" uuid="7397ce39-a61f-423d-807b-d9c69ac7eda6"/>
+				<reportElement x="0" y="-20" width="191" height="17" uuid="7397ce39-a61f-423d-807b-d9c69ac7eda6"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -136,6 +136,9 @@
 				<reportElement x="360" y="-20" width="200" height="21" uuid="d97e8934-aa8c-41c1-9c48-c0e2cc360d51"/>
 				<staticText>
 					<reportElement x="46" y="2" width="62" height="17" uuid="f3422b9c-7810-4aa6-b38b-a1f8f4ac8732"/>
+					<textElement>
+						<font fontName="Times New Roman"/>
+					</textElement>
 					<text><![CDATA[Thời gian in: ]]></text>
 				</staticText>
 				<textField pattern="MMMMM dd, yyyy">
@@ -156,7 +159,7 @@
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 					</reportElement>
-					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="NoDataCell">
 						<datasetRun subDataset="taxTypeDataSet" uuid="6b098cbb-44d2-40b8-993f-d87fd86b1982">
 							<dataSourceExpression><![CDATA[$P{taxTypeDataSet}]]></dataSourceExpression>
 						</datasetRun>
@@ -171,7 +174,7 @@
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="50" height="30" uuid="e14ccd0c-03aa-4018-9409-960fe4bba7ea"/>
+									<reportElement x="0" y="0" width="50" height="30" isPrintWhenDetailOverflows="true" uuid="e14ccd0c-03aa-4018-9409-960fe4bba7ea"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 								</textField>
@@ -188,7 +191,7 @@
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="250" height="30" uuid="d3bd305f-1c7c-430e-b3f5-f3379d997a18"/>
+									<reportElement x="0" y="0" width="250" height="30" isPrintWhenDetailOverflows="true" uuid="d3bd305f-1c7c-430e-b3f5-f3379d997a18"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{taxTypeCode}]]></textFieldExpression>
 								</textField>
@@ -205,7 +208,7 @@
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="250" height="30" uuid="15e5d48f-812f-4ebf-8afb-610253b58a6e">
+									<reportElement x="0" y="0" width="250" height="30" isPrintWhenDetailOverflows="true" uuid="15e5d48f-812f-4ebf-8afb-610253b58a6e">
 										<property name="com.jaspersoft.studio.unit.spacingBefore" value="pixel"/>
 										<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 										<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
@@ -217,6 +220,16 @@
 								</textField>
 							</jr:detailCell>
 						</jr:column>
+						<jr:noData height="30">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="160" height="30" uuid="43db2ff1-b1c7-4d68-a379-216581de39d2"/>
+								<textElement>
+									<font fontName="Arial" size="12" isBold="false"/>
+								</textElement>
+								<text><![CDATA[Không có dữ liệu]]></text>
+							</staticText>
+						</jr:noData>
 					</jr:table>
 				</componentElement>
 				<staticText>
@@ -224,7 +237,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 					</textElement>
-					<text><![CDATA[Loai thue phai nop]]></text>
+					<text><![CDATA[Loại thuế phải nộp]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -237,7 +250,7 @@
 					<text><![CDATA[Don vi chu quan]]></text>
 				</staticText>
 				<componentElement>
-					<reportElement x="0" y="29" width="548" height="61" uuid="a4d60895-47f6-4e03-947a-0a75b2e01ef3">
+					<reportElement x="0" y="29" width="549" height="61" uuid="a4d60895-47f6-4e03-947a-0a75b2e01ef3">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
@@ -245,7 +258,7 @@
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 						<datasetRun subDataset="governingDataSet" uuid="b3463570-c8d3-4852-b288-c0157a075f88">
-							<dataSourceExpression><![CDATA[$P{gorverningDataSet}]]></dataSourceExpression>
+							<dataSourceExpression><![CDATA[$P{governingDataSet}]]></dataSourceExpression>
 						</datasetRun>
 						<jr:column width="60" uuid="75d664ea-d040-4921-9625-df2c21d18fdc">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
@@ -257,8 +270,8 @@
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="30">
-								<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-									<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="60" height="30" uuid="85e2df71-8ff8-43b8-8238-4facd5665208"/>
+								<textField>
+									<reportElement x="0" y="0" width="60" height="30" uuid="85e2df71-8ff8-43b8-8238-4facd5665208"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 								</textField>
@@ -274,8 +287,8 @@
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="30">
-								<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-									<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="120" height="30" uuid="0f019150-66ec-423e-9017-ff02bdf32b99"/>
+								<textField>
+									<reportElement x="0" y="0" width="120" height="30" uuid="0f019150-66ec-423e-9017-ff02bdf32b99"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{taxCode}]]></textFieldExpression>
 								</textField>
@@ -291,8 +304,8 @@
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="30">
-								<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-									<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="120" height="30" uuid="6490ced3-0b5c-45a4-a196-7d493ae7650b"/>
+								<textField>
+									<reportElement x="0" y="0" width="120" height="30" uuid="6490ced3-0b5c-45a4-a196-7d493ae7650b"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{corpName}]]></textFieldExpression>
 								</textField>
@@ -308,25 +321,25 @@
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="30">
-								<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-									<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="150" height="30" uuid="1e4f53ce-e366-4bdd-9a89-3a07dd0f080c"/>
+								<textField>
+									<reportElement x="0" y="0" width="150" height="30" uuid="1e4f53ce-e366-4bdd-9a89-3a07dd0f080c"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="118" uuid="e3576443-8666-43cf-b239-a7c12dd22059">
+						<jr:column width="99" uuid="e3576443-8666-43cf-b239-a7c12dd22059">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 							<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="0" width="118" height="30" uuid="484794ee-dc01-4980-a8b2-0c16fd348355"/>
+									<reportElement x="0" y="0" width="99" height="30" uuid="484794ee-dc01-4980-a8b2-0c16fd348355"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[GTGT]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="30">
-								<textField textAdjust="StretchHeight" isBlankWhenNull="false">
-									<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="118" height="30" uuid="0158327f-7a71-44d2-b2fd-c5f0684c94d6"/>
+								<textField>
+									<reportElement x="0" y="0" width="99" height="30" uuid="0158327f-7a71-44d2-b2fd-c5f0684c94d6"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{vat}]]></textFieldExpression>
 								</textField>

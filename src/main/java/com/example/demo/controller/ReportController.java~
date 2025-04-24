@@ -51,8 +51,8 @@ public class ReportController {
     public ResponseEntity<String> saveCompanyReport(@RequestBody Corp request,
                                                     @RequestParam(value = "outputPath", required = false) String outputPath,
                                                     @RequestParam(value = "outputFileName", required = false, defaultValue = "corpDetalReport.pdf") String outputFileName) throws Exception {
-        reportService.savePdfReport(request, "corp.jrxml", outputPath, outputFileName);
-        return ResponseEntity.ok("Báo cáo đã được lưu thành công tại: " + outputPath + "/" + outputFileName);
+        String filePath = reportService.savePdfReport(request, "corpinfo.jrxml", outputPath, outputFileName);
+        return ResponseEntity.ok("Báo cáo đã được lưu thành công tại: " + filePath);
     }
 
     // Định nghĩa class CompanyDetailRequest (ví dụ)

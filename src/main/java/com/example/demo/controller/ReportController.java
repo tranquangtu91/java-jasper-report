@@ -51,60 +51,7 @@ public class ReportController {
     public ResponseEntity<String> saveCompanyReport(@RequestBody Corp request,
                                                     @RequestParam(value = "outputPath", required = false) String outputPath,
                                                     @RequestParam(value = "outputFileName", required = false, defaultValue = "corpDetalReport.pdf") String outputFileName) throws Exception {
-        String filePath = reportService.savePdfReport(request, "corp.jrxml", outputPath, outputFileName);
+        String filePath = reportService.savePdfReport(request, "corpinfo.jrxml", outputPath, outputFileName);
         return ResponseEntity.ok("Báo cáo đã được lưu thành công tại: " + filePath);
-    }
-
-    // Định nghĩa class CompanyDetailRequest (ví dụ)
-    public static class CompanyDetailRequest {
-        private String companyName;
-        private String address;
-        private List<TaxInfo> taxInfos;
-        private List<MemberCompany> memberCompanies;
-
-        // Getters and setters
-        public String getCompanyName() {
-            return companyName;
-        }
-
-        public void setCompanyName(String companyName) {
-            this.companyName = companyName;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public List<TaxInfo> getTaxInfos() {
-            return taxInfos;
-        }
-
-        public void setTaxInfos(List<TaxInfo> taxInfos) {
-            this.taxInfos = taxInfos;
-        }
-
-        public List<MemberCompany> getMemberCompanies() {
-            return memberCompanies;
-        }
-
-        public void setMemberCompanies(List<MemberCompany> memberCompanies) {
-            this.memberCompanies = memberCompanies;
-        }
-    }
-
-    public static class TaxInfo {
-        private String taxName;
-        private BigDecimal amount;
-        // Getters and setters
-    }
-
-    public static class MemberCompany {
-        private String name;
-        private String location;
-        // Getters and setters
     }
 }

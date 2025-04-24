@@ -146,7 +146,8 @@ public class ReportService {
                     field.setAccessible(true); // Cho phép truy cập các trường private
                     Object fieldValue = field.get(data);
                     if (fieldValue instanceof List) {
-                        parameters.put(field.getName() + "DataSet", new JRBeanCollectionDataSource((List<?>)fieldValue));
+//                        parameters.put(field.getName() + "DataSet", new JRBeanCollectionDataSource((List<?>)fieldValue));
+                        parameters.put(field.getName(), new JRBeanCollectionDataSource((List<?>)fieldValue));
                     } else {
                         parameters.put(field.getName(), fieldValue);
                     }
@@ -160,7 +161,8 @@ public class ReportService {
                         key = key.substring(0, 1).toLowerCase() + key.substring(1); // Chuyển chữ cái đầu thành thường
                         Object methodValue = method.invoke(data);
                         if(methodValue instanceof List) {
-                            parameters.put(key + "DataSet", new JRBeanCollectionDataSource((List<?>) methodValue));
+//                            parameters.put(key + "DataSet", new JRBeanCollectionDataSource((List<?>) methodValue));
+                            parameters.put(key, new JRBeanCollectionDataSource((List<?>) methodValue));
                         } else {
                             parameters.put(key, methodValue);
                         }
@@ -234,7 +236,7 @@ public class ReportService {
         String extension = ".pdf";
 
         if (isNullOrEmpty(outputFileName)) {
-            baseFileName = "corpDetalReport";
+            baseFileName = "report";
         } else {
             if (outputFileName.toLowerCase().endsWith(extension)) {
                 baseFileName = outputFileName.substring(0, outputFileName.length() - extension.length());
