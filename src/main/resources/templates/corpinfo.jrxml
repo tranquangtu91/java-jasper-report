@@ -252,6 +252,9 @@
 		<field name="corpName" class="java.lang.String"/>
 		<field name="taxCode" class="java.lang.String"/>
 	</subDataset>
+	<subDataset name="imageDataset" uuid="5500d07f-6726-4b93-95a6-218df41254bd">
+		<field name="imageBytes" class="byte[]"/>
+	</subDataset>
 	<parameter name="lookupCode" class="java.lang.String"/>
 	<parameter name="businessRegNumber" class="java.lang.String"/>
 	<parameter name="corpName" class="java.lang.String"/>
@@ -289,6 +292,7 @@
 	<parameter name="affiliatedUnits" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="representativeOffices" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="taxPaymentRegLocation" class="java.lang.String"/>
+	<parameter name="images" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -1696,7 +1700,7 @@
 				<text><![CDATA[VIII. VĂN PHÒNG ĐẠI DIỆN]]></text>
 			</staticText>
 		</band>
-		<band height="561">
+		<band height="630">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
 				<reportElement x="8" y="0" width="539" height="60" uuid="399eb76b-c558-4872-a9c3-a60987415ce1">
@@ -1906,17 +1910,27 @@
 					</jr:noData>
 				</jr:table>
 			</componentElement>
-			<image>
-				<reportElement x="4" y="120" width="542" height="420" uuid="5c139856-d373-498e-8d20-38b0fc7f343a"/>
-				<imageExpression><![CDATA[$F{imageStream}]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="8" y="84" width="432" height="30" uuid="b4863015-3dfc-4cd1-8d6b-f1453757a98e"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma&#xA;" size="11" isBold="true"/>
+					<font fontName="ArialFont" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ảnh chụp đính kèm]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement x="0" y="130" width="555" height="500" uuid="4edca9da-a34a-4a89-8189-581de53ae13f"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="imageDataset" uuid="9bd7ad92-9a78-49ed-ba28-e65c79d321ff">
+						<dataSourceExpression><![CDATA[$P{images}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents width="800" height="300">
+						<image scaleImage="RetainShape">
+							<reportElement x="80" y="0" width="400" height="300" uuid="ad56b9a5-420b-4155-b868-e59dae922a05"/>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream($F{imageBytes})]]></imageExpression>
+						</image>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
 		</band>
 	</detail>
 	<pageFooter>
