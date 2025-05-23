@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="corpinfo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="feaf2669-7ef7-44f8-8ded-b442b60bfc88">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -252,6 +252,9 @@
 		<field name="corpName" class="java.lang.String"/>
 		<field name="taxCode" class="java.lang.String"/>
 	</subDataset>
+	<subDataset name="imageDataset" uuid="5500d07f-6726-4b93-95a6-218df41254bd">
+		<field name="imageBytes" class="byte[]"/>
+	</subDataset>
 	<parameter name="lookupCode" class="java.lang.String"/>
 	<parameter name="businessRegNumber" class="java.lang.String"/>
 	<parameter name="corpName" class="java.lang.String"/>
@@ -289,6 +292,7 @@
 	<parameter name="affiliatedUnits" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="representativeOffices" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="taxPaymentRegLocation" class="java.lang.String"/>
+	<parameter name="images" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -1202,11 +1206,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="290" uuid="8cbbdc86-20ff-4a0a-971b-b1f82c5d92bd">
+					<jr:column width="280" uuid="8cbbdc86-20ff-4a0a-971b-b1f82c5d92bd">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table 4_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="290" height="30" uuid="bc284c9a-a080-4897-9bd8-e01c15f9ecb1"/>
+								<reportElement x="0" y="0" width="280" height="30" uuid="bc284c9a-a080-4897-9bd8-e01c15f9ecb1"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -1215,7 +1219,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table 4_TD" height="30">
 							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="290" height="30" uuid="b04ed763-82c4-4aa9-ba29-1db93d1a93a0">
+								<reportElement x="0" y="0" width="280" height="30" uuid="b04ed763-82c4-4aa9-ba29-1db93d1a93a0">
 									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 								</reportElement>
@@ -1227,11 +1231,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="69" uuid="212a56cd-e2b2-453b-835d-28e0729ee372">
+					<jr:column width="79" uuid="212a56cd-e2b2-453b-835d-28e0729ee372">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table 4_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="69" height="30" uuid="f8a91f07-f65d-4953-bda1-d60e59b96d5d"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="f8a91f07-f65d-4953-bda1-d60e59b96d5d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -1240,7 +1244,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table 4_TD" height="30">
 							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="69" height="30" uuid="75c6ae05-5a3e-4c07-bed9-a86d2cc58898"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="75c6ae05-5a3e-4c07-bed9-a86d2cc58898"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -1696,7 +1700,8 @@
 				<text><![CDATA[VIII. VĂN PHÒNG ĐẠI DIỆN]]></text>
 			</staticText>
 		</band>
-		<band height="61">
+		<band height="630">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
 				<reportElement x="8" y="0" width="539" height="60" uuid="399eb76b-c558-4872-a9c3-a60987415ce1">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
@@ -1905,10 +1910,31 @@
 					</jr:noData>
 				</jr:table>
 			</componentElement>
+			<staticText>
+				<reportElement x="8" y="84" width="432" height="30" uuid="b4863015-3dfc-4cd1-8d6b-f1453757a98e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="ArialFont" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ảnh chụp đính kèm]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="130" width="555" height="500" uuid="4edca9da-a34a-4a89-8189-581de53ae13f"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="imageDataset" uuid="9bd7ad92-9a78-49ed-ba28-e65c79d321ff">
+						<dataSourceExpression><![CDATA[$P{images}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents width="800" height="300">
+						<image scaleImage="RetainShape">
+							<reportElement x="80" y="0" width="400" height="300" uuid="ad56b9a5-420b-4155-b868-e59dae922a05"/>
+							<imageExpression><![CDATA[new java.io.ByteArrayInputStream($F{imageBytes})]]></imageExpression>
+						</image>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="18" splitType="Stretch">
+		<band height="38" splitType="Stretch">
 			<textField>
 				<reportElement x="236" y="0" width="100" height="18" uuid="d9ab6bf9-be9d-4f0e-951c-d6159e349ec8"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
